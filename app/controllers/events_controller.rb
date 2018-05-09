@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :register]#como podemos ver aqui el metodo set_event va a funcionar con los siguientes metodos. before action son las cosas que van a ser al cargarse los metodos tales ejecuuta de inmediato el metodo set_event.
+  
 
   # GET /events
   # GET /events.json
@@ -50,6 +51,8 @@ class EventsController < ApplicationController
       end
     end
   end
+  
+  
 
   # DELETE /events/1
   # DELETE /events/1.json
@@ -59,6 +62,13 @@ class EventsController < ApplicationController
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def register
+    #@event=Event.find(params[:id])##params se agarra del url.
+    #tambien podemos usar set_event
+    #set_event
+    #tambien lo podemos agregar arriba como comando que se puedee hacer en la parte de arriba
   end
 
   private
