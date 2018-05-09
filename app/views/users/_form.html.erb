@@ -31,8 +31,8 @@
     <%= form.date_select :date_of_birth , start_year: Date.today.year, end_year: Date.today.year - 100 %><!-- esto es para manejar las fechas de anios de un punto a otro punto.-->
   </div>
 
-  <div class="actions">
+  <div class="actions form-group">
     <!-- asi es como le das estilos a form.submit-->
-    <%= form.submit 'Edit', :class=>'btn btn-primary' %>
+    <%= form.submit 'Submit', :class=>'btn btn-primary' %>
   </div>
 <% end %>

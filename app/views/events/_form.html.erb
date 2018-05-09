@@ -11,32 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :start_date %>
     <%= form.datetime_select :start_date %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :end_date %>
     <%= form.datetime_select :end_date %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :max_students %>
     <%= form.number_field :max_students %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions form-group">
+    <%= form.submit 'Submit',:class=>'btn btn-primary' %>
   </div>
 <% end %>
