@@ -1,6 +1,6 @@
 <%= form_with(model: user, local: true) do |form| %>
   <% if user.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="form-group">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
       <ul>
@@ -11,27 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :email %>
     <%= form.text_field :email %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :first_name %>
     <%= form.text_field :first_name %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :last_name %>
     <%= form.text_field :last_name %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :date_of_birth %>
     <%= form.date_select :date_of_birth , start_year: Date.today.year, end_year: Date.today.year - 100 %><!-- esto es para manejar las fechas de anios de un punto a otro punto.-->
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <!-- asi es como le das estilos a form.submit-->
+    <%= form.submit 'Edit', :class=>'btn btn-primary' %>
   </div>
 <% end %>
