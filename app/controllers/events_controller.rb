@@ -63,20 +63,25 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+  message=''
   def register
     #@event=Event.find(params[:id])##params se agarra del url.
     #tambien podemos usar set_event
     #set_event
     #tambien lo podemos agregar arriba como comando que se puedee hacer en la parte de arriba
-    @users_of_event=@event.users #esto es lo que necesita al final para funcionen las rutas y con sus metodos.
+    @users_of_event = @event.users #esto es lo que necesita al final para funcionen las rutas y con sus metodos.
+
   end
   def register_user
     @event = Event.find(params[:id])
     email = params[:email]
       user = User.where(email: email).take
-      @event.users << user #asi es como agregaos
-      redirect_to register_to_event_path(@event)
+      unless user.nil? #se agrega si es que no es nil
+        @event.users << user #asi es como agregaos
+        redirect_to register_to_event_path(@event)
+        return
+      end
+    redirect_to register_to_event_path(@event), flash: {message: 'error'}
   end
 
   private

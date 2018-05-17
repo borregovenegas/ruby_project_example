@@ -1,22 +1,28 @@
-<div class="container"><h1>Register to <%= @event.name %></h1>
-<table class="table table-striped">
+<div class="container"><h1>Registrate a <%= @event.name %></h1>
+<% flash.each do |message| -%>
+<div class="alert alert-danger">
+      <h1><%= 'Error the user does not exist ' %></h1>
+</div>
+    <% end -%>
+<table>
   <thead>
     <tr>
       <th>Email</th>
     </tr>
   </thead>
-
   <tbody>
     <% @users_of_event.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>
-      </tr>
+        <tr>
+            <td><%= user.email %></td>
+        </tr>
     <% end %>
   </tbody>
 </table>
-<%= form_tag controller: "events", action: "register_user", method: "post" do %>
-<%= label_tag "Email" %>
-<%= text_field_tag :email %>
-<%= submit_tag "Resgister User" %>
 
+<%= form_tag controller: "events", action: "register_user", method: "post" do %>
+    <%= label_tag "Email" %>
+    <%= text_field_tag :email %>
+
+    <%= submit_tag "Registrar usuario" %>
 <% end %>
+<%= link_to 'Back', events_path,class:'btn btn-default' %>
