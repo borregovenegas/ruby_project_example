@@ -1,7 +1,7 @@
 <%= form_with(model: user, local: true) do |form| %>
   <% if user.errors.any? %>
-    <div id="error_explanation" class="form-group">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><strong><%= pluralize(user.errors.count, "error") %> </strong>prohibited this user from being saved:</h2>
 
       <ul>
       <% user.errors.full_messages.each do |message| %>
@@ -33,6 +33,6 @@
 
   <div class="actions form-group">
     <!-- asi es como le das estilos a form.submit-->
-    <%= form.submit 'Submit', :class=>'btn btn-primary' %>
+    <%= form.submit 'Submit', :class=>'btn btn-primary' %><!--est es la forma viejita de hacer el :class=>'clase' ahora se hace de la siguiente forma class: 'clase".como lo hice en 
   </div>
 <% end %>

@@ -69,12 +69,21 @@ class EventsController < ApplicationController
     #tambien podemos usar set_event
     #set_event
     #tambien lo podemos agregar arriba como comando que se puedee hacer en la parte de arriba
+    @users_of_event=@event.users #esto es lo que necesita al final para funcionen las rutas y con sus metodos.
+  end
+  def register_user
+    @event = Event.find(params[:id])
+    email = params[:email]
+      user = User.where(email: email).take
+      @event.users << user #asi es como agregaos
+      redirect_to register_to_event_path(@event)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
+      
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

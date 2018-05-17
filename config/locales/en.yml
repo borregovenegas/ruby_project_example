@@ -30,4 +30,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        email: "Hey your E-mail address"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "input is empty, do you even have an email?"
+              taken: "already exists, are you sure you're you?"
+              
+    
