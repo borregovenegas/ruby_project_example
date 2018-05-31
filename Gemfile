@@ -66,3 +66,6 @@ gem 'bootstrap', '~> 4.1.1'
 
 #aqui le metemos para que funcione el jquery con rails
 gem 'jquery-rails'
+
+#agregamos el gem devise
+gem 'devise'

@@ -10,6 +10,16 @@
   </head>
 
   <body>
+    <%= link_to 'Users', users_path(@event),class:'btn btn-default' %> |
+    <%= link_to 'Events', events_path,class:'btn btn-default' %>
+    <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+    <%= value %>
+    </div>
+  <% end %>
+  
+  <%= link_to 'Salir', destroy_user_session_path, method: :delete if user_signed_in?, class:'btn btn-default' %>
+  
     <%= yield %>
   </body>
 </html>

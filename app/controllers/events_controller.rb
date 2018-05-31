@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :register]#como podemos ver aqui el metodo set_event va a funcionar con los siguientes metodos. before action son las cosas que van a ser al cargarse los metodos tales ejecuuta de inmediato el metodo set_event.
-  
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :register, :register_user]#como podemos ver aqui el metodo set_event va a funcionar con los siguientes metodos. before action son las cosas que van a ser al cargarse los metodos tales ejecuuta de inmediato el metodo set_event.
+  before_action :is_event_full?, only: :register_user
+  before_action :is_valid_email?, only: :register_user
+  before_action :set_user, only: :register_user
 
   # GET /events
   # GET /events.json
@@ -59,7 +61,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to events_url, flash: {success: 'Event was successfully destroyed.' }}
       format.json { head :no_content }
     end
   end
@@ -74,14 +76,14 @@ class EventsController < ApplicationController
   end
   def register_user
     @event = Event.find(params[:id])
-    email = params[:email]
-      user = User.where(email: email).take
-      unless user.nil? #se agrega si es que no es nil
-        @event.users << user #asi es como agregaos
-        redirect_to register_to_event_path(@event)
+    
+      if @user.nil? || @event.users.include?(@user) #se agrega si es que no es nil
+        
+        redirect_to register_to_event_path(@event), flash: {danger: 'Could not register'}
         return
       end
-    redirect_to register_to_event_path(@event), flash: {message: 'error'}
+    @event.users << @user #asi es como agregaos
+    redirect_to register_to_event_path(@event)
   end
 
   private
@@ -90,9 +92,29 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
       
     end
+    #agregamos
+    def set_user
+      email = params[:email]
+      @user = User.where(email: email).take
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(:name, :start_date, :end_date, :max_students, :description)
     end
+    #agregamos esto: verificamos si esta llena el evento
+
+  #agregamos nuestros metodos para ver si esta el evento
+  def is_event_full?
+    if @event.is_event_full?
+      redirect_to register_to_event_path(@event), flash: {danger: "The event #{@event.name} is full so take a hike."} 
+    end
+  end
+  #agregamos este metodo
+  def is_valid_email?
+    if params[:email].blank? || params[:email] !~ User::VALID_EMAIL_REGEX
+      redirect_to register_to_event_path(@event), flash: {danger: "You must specify a correct email"}
+    end
+  end
 end
+
